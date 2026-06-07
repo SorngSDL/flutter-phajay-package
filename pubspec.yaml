@@ -3,9 +3,9 @@ description: Flutter SDK for Phajay Payment Gateway. Generate QR payments and li
 
 version: 1.0.0
 
-homepage: https://github.com/SorngSDL/flutter_phajay_package
-repository: https://github.com/SorngSDL/flutter_phajay_package
-issue_tracker: https://github.com/SorngSDL/flutter_phajay_package/issues
+homepage:  https://github.com/SorngSDL/flutter-phajay-package.git
+repository:  https://github.com/SorngSDL/flutter-phajay-package.git
+issue_tracker:  https://github.com/SorngSDL/flutter-phajay-package.git/issues
 
 topics:
   - payment
