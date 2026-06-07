@@ -1,1 +1,5 @@
-enum BankType { bcel, ldb }
+/// Supported bank types
+enum BankType {
+  bcel,
+  ldb,
+}

@@ -8,6 +8,8 @@ import 'models/create_qr_response.dart';
 import 'models/payment_event.dart';
 import 'phajay_socket.dart';
 
+/// Main SDK client for Phajay Payment.
+/// Used to create QR and listen payment status.
 class PhajayClient {
   final String secretKey;
 

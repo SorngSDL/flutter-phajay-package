@@ -1,10 +1,11 @@
-import 'package:flutter_phajay_package/flutter_phajay_package.dart';
+import '../enums/payment_status.dart';
 
+/// Payment event from socket stream
 class PaymentEvent {
   final PaymentStatus status;
   final Map<String, dynamic> rawData;
 
-  PaymentEvent({
+  const PaymentEvent({
     required this.status,
     required this.rawData,
   });

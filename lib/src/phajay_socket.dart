@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
-import 'constants/api_constant.dart';
-import 'enums/payment_status.dart';
-import 'models/payment_event.dart';
+import '../flutter_phajay_package.dart';
 
 class PhajaySocket {
   final String secretKey;
@@ -34,7 +32,6 @@ class PhajaySocket {
 
     _socket!.on('join::$secretKey', (data) {
       final payload = _normalize(data);
-
       final status = _mapStatus(payload['status']);
 
       _controller.add(
@@ -97,8 +94,6 @@ class PhajaySocket {
       case 'PAYMENT_FAILED':
         return PaymentStatus.failed;
 
-      case 'PENDING':
-      case 'PROCESSING':
       default:
         return PaymentStatus.pending;
     }

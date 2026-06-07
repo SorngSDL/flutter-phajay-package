@@ -2,31 +2,42 @@
 
 Flutter SDK for Phajay Payment Gateway.
 
-This package is ready for public use and exposes the main payment API for QR generation and transaction status listening.
+A lightweight and production-ready Flutter SDK for generating QR payments and listening real-time payment status via WebSocket.
 
-Supports:
-
-- BCEL QR
-- LDB QR
-- Payment status listening
-- WebSocket/socket-based payment events
+This package is designed to be simple, fast, and easy to integrate into any Flutter application.
 
 ---
 
-## Installation
+## ✨ Features
+
+- QR generation (BCEL, LDB)
+- Real-time payment status via WebSocket
+- Stream-based payment event listener
+- Async wait for payment result
+- Clean and simple SDK API
+- Production-ready architecture
+
+---
+
+## 📦 Installation
 
 ```yaml
 dependencies:
-  flutter_phajay_package: ^1.1.1
+  flutter_phajay_package: ^1.1.2
 ```
 
 ---
 
-## Generate QR
+## 🚀 Import
+```dart 
+import 'package:flutter_phajay_package/flutter_phajay_package.dart';
+```
+
+---
+
+## 💳 Generate QR
 
 ```dart
-import 'package:flutter_phajay_package/flutter_phajay_package.dart';
-
 final client = PhajayClient(
   secretKey: 'YOUR_SECRET_KEY',
 );
@@ -39,9 +50,9 @@ final qr = await client.createQr(
 
 ---
 
-## Listen Payment
+## 📡 Listen Payment
 
-```dart
+```dart 
 client.paymentStream.listen((event) {
   if (event.status == PaymentStatus.success) {
     print('Payment Success');
@@ -51,7 +62,7 @@ client.paymentStream.listen((event) {
 
 ---
 
-## Wait Payment
+## ⏳ Wait Payment
 
 ```dart
 await client.waitForPayment();
@@ -59,9 +70,12 @@ await client.waitForPayment();
 
 ---
 
-## Credits
+## 👨‍💻 Credits
 
-Developed by : Sorng Sdr
+Developed by: Sorng Sdr
 
 Facebook:
 https://www.facebook.com/msorng.saiydala.la
+
+---
+
