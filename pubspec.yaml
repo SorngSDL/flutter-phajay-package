@@ -1,7 +1,7 @@
 name: flutter_phajay_package
 description: Flutter SDK for Phajay Payment Gateway. Generate QR payments and listen for status updates using the Phajay payment API and socket events.
 
-version: 1.1.0
+version: 1.1.1
 
 homepage:  https://github.com/SorngSDL/flutter-phajay-package.git
 repository:  https://github.com/SorngSDL/flutter-phajay-package.git

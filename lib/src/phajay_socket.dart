@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
@@ -13,7 +12,7 @@ class PhajaySocket {
 
   io.Socket? _socket;
 
-  final StreamController<PaymentEvent> _controller = StreamController.broadcast();
+  final StreamController<PaymentEvent> _controller = StreamController<PaymentEvent>.broadcast();
 
   Stream<PaymentEvent> get stream => _controller.stream;
 
@@ -30,34 +29,33 @@ class PhajaySocket {
     );
 
     _socket!.onConnect((_) {
-      debugPrint('🔌 Connected to Phajay socket');
+      debugPrint('🔌 Socket connected');
     });
 
     _socket!.on('join::$secretKey', (data) {
-      debugPrint('💰 Payment received: $data');
-      final payload = _normalizeEventData(data);
+      final payload = _normalize(data);
 
-      if (payload['status'] == 'success' || payload['status'] == 'completed') {
-        _controller.add(PaymentEvent(status: PaymentStatus.success, rawData: payload));
-      } else if (payload['status'] == 'failed' || payload['status'] == 'error') {
-        _controller.add(PaymentEvent(status: PaymentStatus.failed, rawData: payload));
-      } else {
-        _controller.add(PaymentEvent(status: PaymentStatus.pending, rawData: payload));
-      }
-    });
+      final status = _mapStatus(payload['status']);
 
-    _socket!.onConnectError((err) {
-      debugPrint('❌ Connect error: $err');
-      _controller.add(PaymentEvent(status: PaymentStatus.failed, rawData: {'error': err.toString()}));
+      _controller.add(
+        PaymentEvent(
+          status: status,
+          rawData: payload,
+        ),
+      );
     });
 
     _socket!.onError((err) {
-      debugPrint('❌ Error: $err');
-      _controller.add(PaymentEvent(status: PaymentStatus.failed, rawData: {'error': err.toString()}));
+      _controller.add(
+        PaymentEvent(
+          status: PaymentStatus.failed,
+          rawData: {'error': err.toString()},
+        ),
+      );
     });
 
     _socket!.onDisconnect((_) {
-      debugPrint('🔌 Disconnected');
+      debugPrint('🔌 Socket disconnected');
     });
 
     _socket!.connect();
@@ -73,16 +71,36 @@ class PhajaySocket {
     _controller.close();
   }
 
-  Map<String, dynamic> _normalizeEventData(dynamic data) {
+  Map<String, dynamic> _normalize(dynamic data) {
     if (data is Map<String, dynamic>) return data;
     if (data is Map) return Map<String, dynamic>.from(data);
     if (data is String) {
       try {
-        return jsonDecode(data) as Map<String, dynamic>;
+        return jsonDecode(data);
       } catch (_) {
         return {'message': data};
       }
     }
     return {'data': data};
+  }
+
+  PaymentStatus _mapStatus(String? status) {
+    switch (status?.toUpperCase()) {
+      case 'PAYMENT_COMPLETED':
+      case 'SUCCESS':
+      case 'COMPLETED':
+      case 'SUCCEEDED':
+        return PaymentStatus.success;
+
+      case 'FAILED':
+      case 'ERROR':
+      case 'PAYMENT_FAILED':
+        return PaymentStatus.failed;
+
+      case 'PENDING':
+      case 'PROCESSING':
+      default:
+        return PaymentStatus.pending;
+    }
   }
 }

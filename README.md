@@ -17,7 +17,7 @@ Supports:
 
 ```yaml
 dependencies:
-  flutter_phajay_package: ^1.1.0
+  flutter_phajay_package: ^1.1.1
 ```
 
 ---
