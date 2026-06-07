@@ -4,4 +4,6 @@ class ApiConstant {
   static const String createBCEL = 'generate-bcel-qr';
 
   static const String createLDB = 'generate-ldb-qr';
+
+  static const String socketUrl = 'https://payment-gateway.phajay.co';
 }

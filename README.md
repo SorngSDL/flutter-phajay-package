@@ -2,12 +2,14 @@
 
 Flutter SDK for Phajay Payment Gateway.
 
+This package is ready for public use and exposes the main payment API for QR generation and transaction status listening.
+
 Supports:
 
 - BCEL QR
 - LDB QR
-- Payment WebSocket
-- Payment Status Listener
+- Payment status listening
+- WebSocket/socket-based payment events
 
 ---
 
@@ -15,7 +17,7 @@ Supports:
 
 ```yaml
 dependencies:
-  flutter_phajay_package: ^1.0.0
+  flutter_phajay_package: ^1.1.0
 ```
 
 ---
@@ -23,6 +25,8 @@ dependencies:
 ## Generate QR
 
 ```dart
+import 'package:flutter_phajay_package/flutter_phajay_package.dart';
+
 final client = PhajayClient(
   secretKey: 'YOUR_SECRET_KEY',
 );
