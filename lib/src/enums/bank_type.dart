@@ -1,0 +1,1 @@
+enum BankType { bcel, ldb }

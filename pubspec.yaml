@@ -1,0 +1,33 @@
+name: flutter_phajay_package
+description: Flutter SDK for Phajay Payment Gateway. Generate QR payments and listen payment status via WebSocket.
+
+version: 1.0.0
+
+homepage: https://github.com/SorngSDL/flutter_phajay_package
+repository: https://github.com/SorngSDL/flutter_phajay_package
+issue_tracker: https://github.com/SorngSDL/flutter_phajay_package/issues
+
+topics:
+  - payment
+  - qr
+  - websocket
+  - flutter
+  - phajay_websocket
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  dio: ^5.9.2
+  web_socket_channel: ^3.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
